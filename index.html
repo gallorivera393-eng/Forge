@@ -347,7 +347,7 @@ function isGitHubImage(name){const lower=String(name||'').toLowerCase();return G
 function cardTitleFromFile(name){return decodeURIComponent(String(name||'').replace(/\.[^.]+$/,'')).replace(/[_-]+/g,' ').replace(/\s+/g,' ').trim()}
 function serialFromTitle(title){return getValidSerial(title)}
 function cardId(tier,index,title){return `github-${tier}-${index}-${String(title).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}`}
-function valueTokens(title){return String(title||'').toLowerCase().replace(/bowman['’]s/g,'bowmans').replace(/\bauto\b/g,'autograph').replace(/\bvlad\s*jr\b/g,'vladimir guerrero jr').replace(/\bacuna\b/g,'ronald acuna jr').replace(/[^a-z0-9]+/g,' ').trim().split(/\s+/).filter(Boolean)}
+function valueTokens(title){return String(title||'').toLowerCase().replace(/bowman['']s/g,'bowmans').replace(/\bauto\b/g,'autograph').replace(/\bvlad\s*jr\b/g,'vladimir guerrero jr').replace(/\bacuna\b/g,'ronald acuna jr').replace(/[^a-z0-9]+/g,' ').trim().split(/\s+/).filter(Boolean)}
 function estimatedValueFor(title){const target=valueTokens(title),exact=target.join(' ');let best=null,bestScore=0,bestCommon=0;for(const entry of CARD_VALUE_RANGES){const candidate=valueTokens(entry[0]),candidateText=candidate.join(' ');if(candidateText===exact)return{low:entry[1],high:entry[2],matched:entry[0]};const common=target.filter(token=>candidate.includes(token)).length;const score=common?2*common/(target.length+candidate.length):0;if(score>bestScore){bestScore=score;bestCommon=common;best=entry}}return bestCommon>=2&&bestScore>=.28?{low:best[1],high:best[2],matched:best[0]}:null}
 // --- RANDOM PRICING SEED LOGIC ---
 // Create a permanent seed for this user so prices remain constant on their device
