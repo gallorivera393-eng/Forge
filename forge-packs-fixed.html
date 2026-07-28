@@ -1,0 +1,335 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="https://i.postimg.cc/bw25vyNg/Forge-F-Logo.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FORGE Packs</title>
+<style>
+:root{--bg:#08090b;--panel:rgba(255,255,255,.05);--line:rgba(255,255,255,.09);--text:#f5f7fb;--muted:#9ca3af;--green:#90f037;--gold:#d7b14e;--shadow:0 24px 80px rgba(0,0,0,.48);--radius:26px}
+*{box-sizing:border-box} html,body{height:100%} html{scrollbar-gutter:stable}
+body{margin:0;color:var(--text);background:radial-gradient(1000px 600px at 50% -220px,rgba(215,177,78,.15),transparent 60%),radial-gradient(800px 600px at 100% 0%,rgba(144,240,55,.08),transparent 50%),linear-gradient(180deg,#070708 0%,#0b0c0f 100%);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden;overflow-y:scroll;scrollbar-gutter:stable}
+a{text-decoration:none;color:inherit} button,input,select{font:inherit}
+.topbar{position:sticky;top:0;z-index:30;backdrop-filter:blur(16px);background:rgba(7,8,10,.84);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1540px;margin:0 auto;height:74px;padding:0 22px;display:flex;align-items:center;gap:18px}
+.brand{display:flex;align-items:center;min-width:210px;padding:0;border:0;background:transparent;cursor:pointer}.brand-logo{width:190px;height:56px;object-fit:contain;object-position:left center;display:block}
+.brand-mark{width:42px;height:42px;border-radius:12px;border:2px solid rgba(255,255,255,.92);overflow:hidden;background:rgba(255,255,255,.02);display:grid;place-items:center;position:relative;flex:0 0 auto}
+.brand-mark img{width:100%;height:100%;object-fit:cover;display:block}
+.brand-mark::after{content:"";position:absolute;inset:7px 7px auto auto;width:12px;height:3px;background:var(--green);border-radius:999px}
+.brand-text{display:grid;gap:1px}.brand-text strong{font-size:14px;line-height:1}.brand-text span{font-size:11px;opacity:.78;letter-spacing:.18em}
+.nav{display:flex;align-items:center;gap:24px;font-weight:700;font-size:15px;color:#e6e8ee}.nav a{opacity:.85}.nav a.active{color:#fff;opacity:1}
+.spacer{flex:1}
+.search{width:min(420px,30vw);min-width:230px;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--muted)}
+.search input{width:100%;background:transparent;border:0;outline:0;color:#fff}
+.btn{border:0;border-radius:999px;cursor:pointer;user-select:none;transition:transform .15s ease,opacity .15s ease,box-shadow .15s ease}.btn:hover{transform:translateY(-1px)}.btn:active{transform:translateY(1px)}
+.btn-dark{background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.08);padding:12px 16px}
+.btn-green{background:linear-gradient(180deg,#94f741,#6ecc20);color:#081009;padding:12px 18px;font-weight:900;box-shadow:0 10px 26px rgba(123,215,42,.26)}
+.wrap{max-width:1540px;margin:0 auto;padding:22px}
+.hero{display:grid;grid-template-columns:1.35fr .95fr;gap:18px;margin-bottom:18px}
+.panel{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.03));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.hero-main{min-height:230px;padding:28px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;gap:18px}
+.hero-main::before{content:"";position:absolute;inset:-10% -6% auto auto;width:430px;height:430px;background:radial-gradient(circle,rgba(215,177,78,.18),transparent 65%);filter:blur(12px);pointer-events:none}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.18em;color:#ecd89d;margin-bottom:10px}
+.title{margin:0;font-size:clamp(30px,4.6vw,58px);line-height:.93;letter-spacing:-.06em;max-width:12ch}
+.subtitle{margin:14px 0 0;color:var(--muted);max-width:78ch;line-height:1.58;font-size:15px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:18px}
+.mini-card{padding:16px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);min-height:122px;display:flex;flex-direction:column;justify-content:space-between}
+.mini-card .label{color:var(--muted);font-size:13px}.mini-card .value{font-size:30px;font-weight:900;letter-spacing:-.04em}.mini-card .sub{color:var(--muted);font-size:12px}
+.tabs{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.tab-btn{padding:12px 16px;background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(255,255,255,.08);border-radius:999px;font-weight:800;cursor:pointer}
+.tab-btn.active{background:linear-gradient(180deg,rgba(215,177,78,.23),rgba(215,177,78,.09));border-color:rgba(215,177,78,.35);box-shadow:0 10px 24px rgba(215,177,78,.12)}
+.view{display:none}.view.active{display:block}
+.layout-store{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;align-items:start}
+.section{padding:18px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:16px}.section-head h2{margin:0;font-size:22px;letter-spacing:-.03em}.section-head p{margin:6px 0 0;color:var(--muted);font-size:14px;line-height:1.5}
+.status-pill{display:inline-flex;align-items:center;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);color:#fff;font-size:12px;font-weight:800;white-space:nowrap}
+.pack-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.pack{border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.025));padding:14px;cursor:pointer;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;min-height:300px;position:relative;display:flex;flex-direction:column}
+.pack:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.16);box-shadow:0 20px 45px rgba(0,0,0,.35)}
+.pack-top{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:10px}.pill{display:inline-flex;align-items:center;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:900;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.07);white-space:nowrap}.pack-price{color:#fff;font-weight:900;font-size:18px;letter-spacing:-.02em}
+.pack-art{height:180px;border-radius:18px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:radial-gradient(circle at 32% 14%,rgba(255,255,255,.36),transparent 18%),linear-gradient(180deg,rgba(255,255,255,.06),transparent 28%),linear-gradient(180deg,#24262d,#0f1013 58%,#08090b);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 22px 48px rgba(0,0,0,.38);display:flex;align-items:center;justify-content:center}
+.pack-art::before{content:"";position:absolute;inset:-20px;background:linear-gradient(135deg,transparent 33%,rgba(255,255,255,.11) 39%,transparent 45%,transparent 60%,rgba(255,255,255,.11) 66%,transparent 72%);transform:skewY(-8deg);opacity:.7;animation:shine 2.3s linear infinite}
+.pack-art img{width:100%;height:100%;object-fit:contain;display:block;position:relative;z-index:1}
+.pack-name{position:relative;z-index:1;text-align:center;text-transform:uppercase;font-weight:900;line-height:.9;letter-spacing:-.06em;font-size:34px;text-shadow:0 4px 18px rgba(0,0,0,.32)}
+.pack-name small{display:block;font-size:12px;letter-spacing:.22em;opacity:.82;margin-bottom:10px}
+.pack-desc{margin-top:12px;color:var(--muted);font-size:13px;line-height:1.55;min-height:40px}
+.pack-actions{display:grid;gap:8px;margin-top:auto}.pack-btn{width:100%;padding:12px 14px;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.10);border-radius:16px;font-weight:800}.pack-buy-btn{width:100%;padding:12px 14px;background:linear-gradient(180deg,#94f741,#6ecc20);color:#081009;border:0;border-radius:16px;font-weight:900;box-shadow:0 10px 22px rgba(123,215,42,.18)}
+.right-col{position:sticky;top:92px}
+.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.metric{padding:16px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);min-height:114px;display:flex;flex-direction:column;justify-content:space-between}
+.metric .label{color:var(--muted);font-size:13px}.metric .value{font-weight:900;font-size:26px;letter-spacing:-.04em}.metric .sub{color:var(--muted);font-size:12px}
+.note{margin-top:12px;padding:16px;border-radius:20px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:var(--muted);line-height:1.6;font-size:14px}
+.collection-hero{padding:20px;border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.08);margin-bottom:18px}
+.view-header{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:16px}.view-header h2{margin:0;font-size:24px;letter-spacing:-.04em}.view-header p{margin:6px 0 0;color:var(--muted);line-height:1.5;font-size:14px}
+.collection-tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.collection-tools input,.collection-tools select{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 14px;outline:none}.collection-tools select option{background:#111318}
+.collection-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.card{border-radius:24px;overflow:hidden;background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.12),transparent 30%),linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.08);box-shadow:0 20px 40px rgba(0,0,0,.22);cursor:pointer;transition:transform .18s ease,border-color .18s ease;min-height:368px}
+.card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.16)}
+.slab{padding:10px;background:linear-gradient(180deg,#f2f2f3 0%,#dadbdd 100%)}
+.slab-top{background:#fff;border-radius:14px 14px 0 0;padding:8px 10px 7px;border:1px solid rgba(20,20,20,.12);border-bottom:0;color:#000;display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:64px}
+.slab-brand{font-weight:900;font-size:10px;line-height:1.05;letter-spacing:.08em;text-transform:uppercase}.slab-id{text-align:right;font-size:11px;line-height:1.2;font-weight:800;color:#0f1720}
+.card-image{aspect-ratio:.71 / 1;border:1px solid rgba(20,20,20,.12);border-top:0;background:radial-gradient(circle at 35% 18%,rgba(255,255,255,.28),transparent 18%),linear-gradient(180deg,rgba(255,255,255,.12),transparent 24%),linear-gradient(180deg,#253044,#0e1016);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.card-image::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent 37%,rgba(255,255,255,.15) 44%,transparent 51%);opacity:.55}
+.card-image img{width:100%;height:100%;object-fit:contain;display:block;position:relative;z-index:1}
+.placeholder-card{position:relative;z-index:1;text-align:center;font-weight:900;font-size:28px;line-height:.92;letter-spacing:-.06em;text-shadow:0 2px 18px rgba(0,0,0,.26);color:#fff;padding:0 16px}
+.card-meta{padding:12px 12px 14px}.card-title{font-weight:900;font-size:14px;line-height:1.22;letter-spacing:-.02em;color:#fff;min-height:34px}.card-sub{margin-top:6px;color:var(--muted);font-size:12px;line-height:1.45}.card-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.badge{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);white-space:nowrap}
+.empty{padding:22px;border-radius:20px;border:1px dashed rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:var(--muted);line-height:1.6}
+.overlay{position:fixed;inset:0;z-index:70;display:none;place-items:center;background:rgba(0,0,0,.70);backdrop-filter:blur(16px);padding:24px;overflow:auto;scrollbar-gutter:stable}.overlay.show{display:grid}
+.modal{width:min(1120px,100%);border-radius:30px;overflow:hidden;background:linear-gradient(180deg,rgba(16,18,23,.98),rgba(8,9,12,.98));border:1px solid rgba(255,255,255,.10);box-shadow:0 30px 90px rgba(0,0,0,.60);position:relative}
+.modal-close{position:absolute;top:16px;right:16px;width:42px;height:42px;border-radius:999px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.08);color:#fff;cursor:pointer;z-index:2;font-size:18px}
+.modal-grid{display:grid;grid-template-columns:.95fr 1.05fr;height:min(92vh,880px);overflow:hidden}
+.modal-hero{padding:32px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 30%,rgba(215,177,78,.18),transparent 40%),linear-gradient(180deg,rgba(255,255,255,.05),transparent 28%)}
+.modal-pack{width:min(100%,360px);aspect-ratio:.72 / 1;border-radius:30px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.10);box-shadow:0 24px 60px rgba(0,0,0,.50),inset 0 1px 0 rgba(255,255,255,.12);background:radial-gradient(circle at 32% 18%,rgba(255,255,255,.38),transparent 17%),linear-gradient(180deg,rgba(255,255,255,.06),transparent 24%),linear-gradient(180deg,#26272d,#111216 60%,#07080a);display:flex;align-items:center;justify-content:center;padding:26px}
+.modal-pack::before{content:"";position:absolute;inset:-30px;background:linear-gradient(135deg,transparent 31%,rgba(255,255,255,.14) 37%,transparent 44%,transparent 58%,rgba(255,255,255,.14) 64%,transparent 70%);transform:skewY(-8deg);opacity:.8;animation:shine 2.3s linear infinite}
+.modal-pack img{width:100%;height:100%;object-fit:contain;border-radius:30px;display:block;position:relative;z-index:1}
+.modal-pack-text{position:relative;z-index:1;text-align:center;text-transform:uppercase;font-size:48px;font-weight:900;line-height:.9;letter-spacing:-.07em;text-shadow:0 4px 24px rgba(0,0,0,.35)}
+.modal-pack-text small{display:block;font-size:12px;letter-spacing:.24em;margin-bottom:12px;opacity:.82}
+.modal-body{padding:28px;border-left:1px solid rgba(255,255,255,.08);overflow-y:auto;min-height:0}
+.modal-body h3{margin:0;font-size:30px;letter-spacing:-.05em}.modal-body p{color:var(--muted);line-height:1.58;font-size:14px;margin:10px 0 0}
+.pack-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.summary-box{padding:14px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.05)}.summary-box .k{color:var(--muted);font-size:12px}.summary-box .v{margin-top:6px;font-size:18px;font-weight:900}
+.pack-section{margin-top:18px}.pack-section h4{margin:0 0 8px;font-size:17px;letter-spacing:-.02em}.pack-section .rate{color:var(--muted);font-size:13px;margin-bottom:10px}
+.loot-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.loot{border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);cursor:pointer;transition:transform .15s ease,border-color .15s ease}.loot:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.16)}
+.loot-preview{height:134px;position:relative;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 35% 18%,rgba(255,255,255,.28),transparent 18%),linear-gradient(180deg,rgba(255,255,255,.10),transparent 24%),linear-gradient(180deg,#273243,#11141b)}.loot-preview::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent 37%,rgba(255,255,255,.12) 43%,transparent 49%);opacity:.55}
+.loot-preview img{width:100%;height:100%;object-fit:contain;display:block;position:relative;z-index:1}
+.loot-placeholder{position:relative;z-index:1;text-align:center;font-weight:900;font-size:24px;line-height:.94;letter-spacing:-.06em;color:#fff}
+.loot-body{padding:12px}.loot-title{font-weight:900;font-size:13px;line-height:1.3;min-height:34px}.loot-meta{margin-top:6px;color:var(--muted);font-size:12px;line-height:1.45}.loot-badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.loot-badge{display:inline-flex;align-items:center;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);font-size:10px;font-weight:800}
+.action-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.action-row .btn{padding:12px 16px;font-weight:800}.sell-btn{background:linear-gradient(180deg,#94f741,#6ecc20);color:#081009}.secondary-btn{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.08)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(18px);opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease;background:rgba(18,20,26,.95);color:#fff;border:1px solid rgba(255,255,255,.10);box-shadow:var(--shadow);border-radius:999px;padding:12px 16px;z-index:90;max-width:calc(100vw - 28px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.positive{color:#98ff62}.negative{color:#ff8181}.tiny{font-size:11px;color:var(--muted)}.hidden{display:none !important}
+@keyframes shine{from{transform:translateX(-150%) rotate(8deg)}to{transform:translateX(150%) rotate(8deg)}}
+@keyframes revealFlip{0%{transform:perspective(1200px) rotateY(0deg) scale(.94);filter:brightness(.92)}45%{transform:perspective(1200px) rotateY(90deg) scale(.96)}50%{transform:perspective(1200px) rotateY(180deg) scale(.98)}100%{transform:perspective(1200px) rotateY(360deg) scale(1);filter:brightness(1)}}
+.flip{animation:revealFlip 1.1s cubic-bezier(.2,.8,.2,1)}
+.reveal-pulse{animation:revealPulse .7s ease-in-out infinite alternate}@keyframes revealPulse{from{transform:scale(.96);filter:brightness(.8)}to{transform:scale(1.02);filter:brightness(1.25)}}
+@media (max-width:1220px){.hero{grid-template-columns:1fr}.layout-store{grid-template-columns:1fr}.right-col{position:static}.pack-grid,.collection-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.modal-grid{grid-template-columns:1fr}.modal-body{border-left:0;border-top:1px solid rgba(255,255,255,.08)}}
+@media (max-width:820px){.topbar-inner{gap:12px}.brand{min-width:auto}.nav,.search{display:none}.collection-grid,.loot-grid,.pack-summary,.metrics,.info-grid,.pack-grid{grid-template-columns:1fr}.hero-main{padding:22px}.section-head,.view-header{align-items:start;flex-direction:column}.modal-grid{height:92vh}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+  <button class="brand" id="homeLogo" type="button" aria-label="Return to the FORGE Packs home screen"><img class="brand-logo" id="forgeLogo" alt="FORGE Packs"></button>
+  <nav class="nav"><a href="#" class="active" data-tab="storeView">Store</a><a href="#" data-tab="collectionView">Collection</a></nav>
+  <div class="spacer"></div>
+  <label class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input id="topSearch" placeholder="Search packs"></label>
+  <button class="btn btn-dark" id="resetBtn">Reset Save</button><button class="btn btn-green">Sign up</button>
+</div></header>
+
+<main class="wrap">
+<section class="hero">
+  <div class="panel hero-main">
+    <div><div class="eyebrow">Premium card marketplace</div><h1 class="title">Open packs. Pull slabs. Build your FORGE collection.</h1>
+    <p class="subtitle">Start with $0. Buy a pack and your cash can go negative. Reveal a card with real value, then decide whether to sell instantly for cash or keep it in your collection. Lineup cards refresh in 30-card batches when the current pool is exhausted.</p></div>
+    <div class="hero-actions"><button class="btn btn-green" id="openFirstPack">Open a Pack</button><button class="btn btn-dark" id="goCollection">View Collection</button></div>
+  </div>
+  <div class="panel info-grid">
+    <div class="mini-card"><div class="label">Cash balance</div><div class="value" id="cashValue">$0</div><div class="sub">Pack buys can push you negative.</div></div>
+    <div class="mini-card"><div class="label">Net worth</div><div class="value" id="netWorthValue">$0</div><div class="sub">Cash plus all cards in collection.</div></div>
+    <div class="mini-card"><div class="label">Packs opened</div><div class="value" id="packsOpenedValue">0</div><div class="sub">Every break completed.</div></div>
+    <div class="mini-card"><div class="label">Cards owned</div><div class="value" id="ownedValue">0</div><div class="sub">Everything displayed in Collection.</div></div>
+  </div>
+</section>
+
+<div class="tabs"><button class="tab-btn active" data-tab="storeView">Store</button><button class="tab-btn" data-tab="collectionView">Collection</button></div>
+
+<section id="storeView" class="view active">
+  <div class="layout-store">
+    <div class="panel section">
+      <div class="section-head"><div><h2>Pack Store</h2><p>Click a tier to inspect its grails, chase cards, and lineup cards before you buy.</p></div><div class="status-pill">FORGE Packs</div></div>
+      <div class="pack-grid" id="packGrid"></div>
+    </div>
+    <aside class="panel section right-col">
+      <div class="section-head"><div><h2>Market Snapshot</h2><p>Premium look, live economy, and serial-limited pulls.</p></div></div>
+      <div class="metrics">
+        <div class="metric"><div class="label">Total spent</div><div class="value negative" id="spentValue">$0</div><div class="sub">Pack purchases only.</div></div>
+        <div class="metric"><div class="label">Sold instantly</div><div class="value positive" id="soldValue">$0</div><div class="sub">Cards sold right away.</div></div>
+        <div class="metric"><div class="label">Collection value</div><div class="value" id="collectionValue">$0</div><div class="sub">If every card were sold now.</div></div>
+        <div class="metric"><div class="label">Profit if sold all</div><div class="value positive" id="profitValue">$0</div><div class="sub">Net after spending.</div></div>
+      </div>
+      <div class="note">Grails are the rarest, chase cards are uncommon, and lineup cards are the most frequently hit. Limited cards stop once their print run is exhausted, and lineup cards refill in 30-card batches.</div>
+    </aside>
+  </div>
+</section>
+
+<section id="collectionView" class="view">
+  <div class="panel section">
+    <div class="collection-hero">
+      <div class="view-header"><div><h2>Your Collection</h2><p>A dedicated space to admire every card you own. Sold cards leave the collection, while kept cards stay displayed here.</p></div><div class="status-pill" id="collectionCountPill">0 cards</div></div>
+      <div class="collection-tools"><input id="collectionSearch" placeholder="Search your collection"><select id="collectionFilter"><option value="all">All tiers</option><option value="1/1">1/1 only</option><option value="/5">/5</option><option value="/10">/10</option><option value="/25">/25</option><option value="/50">/50</option><option value="/99">/99</option><option value="/250">/250</option><option value="/499">/499</option><option value="/999">/999</option></select><select id="collectionSort"><option value="value-desc">Sort: Highest value</option><option value="value-asc">Sort: Lowest value</option><option value="name-asc">Sort: Name A-Z</option><option value="serial-asc">Sort: Serial</option></select></div>
+      <div id="collectionGrid" class="collection-grid"></div><div id="collectionEmpty" class="empty hidden">Your collection is empty. Buy a pack from the Store and keep a card to display it here.</div>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="overlay" id="packOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Pack preview"><div class="modal">
+  <button class="modal-close" id="closeModal">×</button>
+  <div class="modal-grid">
+    <div class="modal-hero"><div class="modal-pack" id="modalPackArt"><div class="modal-pack-text" id="modalPackText"><small>FORGE PACK</small>SELECT<br>PACK</div></div></div>
+    <div class="modal-body">
+      <div class="eyebrow" id="modalPackLabel">Pack Preview</div><h3 id="modalPackName">Pack Name</h3><p id="modalPackDesc"></p>
+      <div class="pack-summary"><div class="summary-box"><div class="k">Pack price</div><div class="v" id="modalPackPrice">$0</div></div><div class="summary-box"><div class="k">Rarest pull</div><div class="v" id="modalPackRare">0.00%</div></div><div class="summary-box"><div class="k">Most common</div><div class="v" id="modalPackCommon">0.00%</div></div></div>
+      <div id="lootSections"></div>
+      <div class="action-row"><button class="btn sell-btn" id="buyOpenBtn">Buy & Open</button><button class="btn secondary-btn" id="closeModalBtn">Close</button></div>
+      <p class="tiny" style="margin-top:12px;">Replace any title, image, or value in the pack definitions at the bottom of the script. The layout will stay the same.</p>
+    </div>
+  </div>
+</div></div>
+
+<div class="overlay" id="cardOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Card details"><div class="modal">
+  <button class="modal-close" id="closeCardModal">×</button>
+  <div class="modal-grid">
+    <div class="modal-hero"><div class="modal-pack" id="cardHero"><div class="modal-pack-text" id="cardHeroText"><small>FORGE COLLECTION</small>CARD</div></div></div>
+    <div class="modal-body">
+      <div class="eyebrow" id="cardPackLabel">Collection</div><h3 id="cardTitle">Card Name</h3><p id="cardDesc"></p>
+      <div class="pack-summary"><div class="summary-box"><div class="k">Value</div><div class="v" id="cardValue">$0</div></div><div class="summary-box"><div class="k">Serial</div><div class="v" id="cardSerial">1/1</div></div><div class="summary-box"><div class="k">Tier</div><div class="v" id="cardTier">Grail</div></div></div>
+      <div class="action-row" id="cardActions"><button class="btn sell-btn" id="sellCardBtn">Sell card</button><button class="btn secondary-btn" id="keepCardBtn">Keep card</button></div>
+      <p class="tiny" style="margin-top:12px;">Keeping the card places it in your collection. Selling it instantly returns its full value as cash.</p>
+    </div>
+  </div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const fmt=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+const SAVE_KEY='forge-packs-save-v4';
+const LOGO_URL='https://codehs.com/uploads/174252ba20b9a236c72ee387c204de57';
+
+const PACKS={
+ legendary:{id:'legendary',name:'Legendary',sport:'Baseball',price:2500,image:'https://codehs.com/uploads/84c7c5764abcec6d3b0c24179b12bdb1',description:'Elite slab pack with the highest ceiling and only premium hits.',short:'Legendary',rarityLabel:'1/1 and low-numbered chase cards',grailsRate:0.04,chaseRate:0.22,lineupBatchSize:30,grails:[
+  {id:'legendary-grail-ohtani-5050',title:'2024 TOPPS NOW Shohei Ohtani 50/50 Autographed 1/1',value:75000,serial:'1/1',sport:'Baseball',tier:'Grail',image:'https://codehs.com/uploads/265ef8f1d8badcf85084fe4cbf5bf045',note:'True one-of-one centerpiece.'},
+  {id:'legendary-grail-ohtani-logoman',title:'2025 Topps Chrome Gold MLB Logoman Shohei Ohtani Patch Auto 1/1',value:68000,serial:'1/1',sport:'Baseball',tier:'Grail',image:'https://codehs.com/uploads/c24b48b082dfa30bddfb74524533734a',note:'Premium logoman auto with gold finish.'},
+  {id:'legendary-grail-mahomes-1of1',title:'Shohei Ohtani Shield Auto 1/1',value:52000,serial:'1/1',sport:'Baseball',tier:'Grail',image:'',note:'Big-game baseball grail.'},
+  {id:'legendary-grail-messi-1of1',title:'Mike Trout Superfractor Auto 1/1',value:61000,serial:'1/1',sport:'Baseball',tier:'Grail',image:'',note:'International grail with museum appeal.'}
+ ],chase:[
+  {id:'legendary-chase-curry-5',title:'Mookie Betts Gold Topps Chrome Auto 1/5',value:22000,serial:'1/5',sport:'Baseball',tier:'Chase',image:'',note:'Low-numbered color match.'},
+  {id:'legendary-chase-judge-10',title:'Aaron Judge Gold Refractor Auto 1/10',value:16000,serial:'1/10',sport:'Baseball',tier:'Chase',image:'',note:'Strong post-season heat.'},
+  {id:'legendary-chase-jalen-10',title:'Ronald Acuña Jr. Black Auto 1/10',value:14500,serial:'1/10',sport:'Baseball',tier:'Chase',image:'',note:'Star-player color hit.'},
+  {id:'legendary-chase-zidane-25',title:'Bryce Harper Black 1/25',value:11000,serial:'1/25',sport:'Baseball',tier:'Chase',image:'',note:'Collector-favorite legend.'}
+ ],lineupBlueprints:[
+  {title:'Topps NOW Star Pair',sport:'Baseball',value:680,serialBase:'1/99',image:''},{title:'Chrome Rookie Autograph',sport:'Baseball',value:540,serialBase:'1/99',image:''},{title:'Topps Chrome Color Match',sport:'Baseball',value:620,serialBase:'1/99',image:''},{title:'Museum Stadium Club Relic',sport:'Baseball',value:460,serialBase:'1/99',image:''},{title:'Topps Chrome Insert',sport:'Baseball',value:510,serialBase:'1/99',image:''},{title:'Immaculate Patch Auto',sport:'Baseball',value:780,serialBase:'1/99',image:''},{title:'Bowman Chrome Prospect',sport:'Baseball',value:430,serialBase:'1/99',image:''},{title:'Topps Finest Parallel',sport:'Baseball',value:590,serialBase:'1/99',image:''},{title:'Topps Heritage Action Card',sport:'Baseball',value:410,serialBase:'1/99',image:''},{title:'Topps Chrome Photo Variation',sport:'Baseball',value:500,serialBase:'1/99',image:''},{title:'Topps Chrome Refractor',sport:'Baseball',value:470,serialBase:'1/99',image:''},{title:'Ultra Rare Insert',sport:'Baseball',value:560,serialBase:'1/99',image:''},{title:'Topps Chrome Neon Blue',sport:'Baseball',value:650,serialBase:'1/99',image:''},{title:'Topps Downtown Variant',sport:'Baseball',value:700,serialBase:'1/99',image:''},{title:'Finest Rookie Ticket',sport:'Baseball',value:430,serialBase:'1/99',image:''},{title:'Topps Fire Burst',sport:'Baseball',value:520,serialBase:'1/99',image:''},{title:'Topps Black Etch',sport:'Baseball',value:610,serialBase:'1/99',image:''},{title:'Stadium Club Beam Team',sport:'Baseball',value:450,serialBase:'1/99',image:''},{title:'Topps Chrome Tri-Color',sport:'Baseball',value:540,serialBase:'1/99',image:''},{title:'Absolute Rookie Patch',sport:'Baseball',value:760,serialBase:'1/99',image:''},{title:'Archives Fan Favorite',sport:'Baseball',value:390,serialBase:'1/99',image:''},{title:'Gallery Sketch Card',sport:'Baseball',value:570,serialBase:'1/99',image:''},{title:'Topps Chrome Rookie Speckle',sport:'Baseball',value:420,serialBase:'1/99',image:''},{title:'Topps Signature',sport:'Baseball',value:460,serialBase:'1/99',image:''},{title:'Topps Ticket',sport:'Baseball',value:520,serialBase:'1/99',image:''},{title:'Topps Hyper Parallel',sport:'Baseball',value:610,serialBase:'1/99',image:''},{title:'Stadium Club Rainbow Foil',sport:'Baseball',value:440,serialBase:'1/99',image:''},{title:'Topps Premier Level',sport:'Baseball',value:500,serialBase:'1/99',image:''},{title:'Bowman Freshman Fabric',sport:'Baseball',value:620,serialBase:'1/99',image:''},{title:'Bowman Sapphire Draft',sport:'Baseball',value:450,serialBase:'1/99',image:''}
+ ]},
+ diamond:{id:'diamond',name:'Diamond',sport:'Baseball',price:1000,image:'https://codehs.com/uploads/f12e35108a5aeaac5c209fc5d625ab2e',description:'Premium baseball-heavy pack with strong upside and clean modern hits.',short:'Diamond',rarityLabel:'Low-numbered and star rookie hits',grailsRate:0.06,chaseRate:0.35,lineupBatchSize:30,grails:[
+  {id:'diamond-grail-ohtani',title:'Shohei Ohtani Chrome Superfractor 1/1',value:42000,serial:'1/1',sport:'Baseball',tier:'Grail',image:'',note:'The face of the pack.'},
+  {id:'diamond-grail-judge',title:'Aaron Judge Gold Wave Auto 1/1',value:25000,serial:'1/1',sport:'Baseball',tier:'Grail',image:'',note:'One-of-one Yankee hit.'},
+  {id:'diamond-grail-araujo',title:'Rising Star Autograph 1/1',value:18000,serial:'1/1',sport:'Baseball',tier:'Grail',image:'',note:'Modern centerpiece autograph.'}
+ ],chase:[
+  {id:'diamond-chase-ohtani-5',title:'Shohei Ohtani Patch Auto 1/5',value:13500,serial:'1/5',sport:'Baseball',tier:'Chase',image:'',note:'Premium low-number hit.'},
+  {id:'diamond-chase-witt-10',title:'Bobby Witt Jr. Red Refractor 1/10',value:9800,serial:'1/10',sport:'Baseball',tier:'Chase',image:'',note:'High-upside star.'},
+  {id:'diamond-chase-henderson-25',title:'Gunnar Henderson Gold 1/25',value:7600,serial:'1/25',sport:'Baseball',tier:'Chase',image:'',note:'Short-print color.'},
+  {id:'diamond-chase-skenes-50',title:'Paul Skenes Rookie 1/50',value:6100,serial:'1/50',sport:'Baseball',tier:'Chase',image:'',note:'Strong rookie market.'}
+ ],lineupBlueprints:Array.from({length:30},(_,i)=>({title:`Diamond Series Card ${i+1}`,sport:['Baseball','Baseball','Baseball','Baseball'][i%4],value:220+(i%6)*45,serialBase:'1/99',image:''}))},
+ ruby:{id:'ruby',name:'Ruby',sport:'Baseball',price:250,image:'https://codehs.com/uploads/3a23a446aaba5bf86f6616bcf35f20f1',description:'Balanced value pack with lots of good looking hits and room for a big jump.',short:'Ruby',rarityLabel:'Mid-tier autos, parallels, and inserts',grailsRate:0.08,chaseRate:0.40,lineupBatchSize:30,grails:[
+  {id:'ruby-grail-jordan',title:'Ken Griffey Jr. Auto 1/1',value:38000,serial:'1/1',sport:'Baseball',tier:'Grail',image:'',note:'Iconic centerpiece.'},
+  {id:'ruby-grail-messi',title:'Mike Trout Auto 1/1',value:34000,serial:'1/1',sport:'Baseball',tier:'Grail',image:'',note:'Global grail.'}
+ ],chase:[
+  {id:'ruby-chase-durant-5',title:'Aaron Judge Gold 1/5',value:7200,serial:'1/5',sport:'Baseball',tier:'Chase',image:'',note:'Low-numbered veteran hit.'},
+  {id:'ruby-chase-burrow-10',title:'Gerrit Cole Auto 1/10',value:6900,serial:'1/10',sport:'Baseball',tier:'Chase',image:'',note:'Strong ace value.'},
+  {id:'ruby-chase-judge-25',title:'Aaron Judge Relic 1/25',value:5100,serial:'1/25',sport:'Baseball',tier:'Chase',image:'',note:'Popular star parallel.'}
+ ],lineupBlueprints:Array.from({length:30},(_,i)=>({title:`Ruby Lineup ${i+1}`,sport:['Baseball','Baseball','Baseball','Baseball'][i%4],value:90+(i%10)*12,serialBase:'1/250',image:''}))},
+ sapphire:{id:'sapphire',name:'Sapphire',sport:'Baseball',price:750,image:'https://codehs.com/uploads/565740b4c4fdedee171482b820a696f7',description:'Cool-toned premium pack with higher-end cards and elegant presentation.',short:'Sapphire',rarityLabel:'Premium numbered cards and color matches',grailsRate:0.05,chaseRate:0.30,lineupBatchSize:30,grails:[
+  {id:'sapphire-grail-mbappe',title:'Juan Soto Superfractor 1/1',value:45000,serial:'1/1',sport:'Baseball',tier:'Grail',image:'',note:'Elite international baseball piece.'},
+  {id:'sapphire-grail-lebron',title:'Fernando Tatis Jr. Gold Auto 1/1',value:53000,serial:'1/1',sport:'Baseball',tier:'Grail',image:'',note:'Museum-level baseball hit.'}
+ ],chase:[
+  {id:'sapphire-chase-curry-10',title:'Mookie Betts Blue Auto 1/10',value:15000,serial:'1/10',sport:'Baseball',tier:'Chase',image:'',note:'Clean sapphire color match.'},
+  {id:'sapphire-chase-johnson-25',title:'Derek Jeter Auto 1/25',value:9000,serial:'1/25',sport:'Baseball',tier:'Chase',image:'',note:'Iconic legend.'},
+  {id:'sapphire-chase-vini-50',title:'Julio Rodríguez 1/50',value:8200,serial:'1/50',sport:'Baseball',tier:'Chase',image:'',note:'Modern baseball star.'}
+ ],lineupBlueprints:Array.from({length:30},(_,i)=>({title:`Sapphire Lineup ${i+1}`,sport:['Baseball','Baseball','Baseball','Baseball'][i%4],value:140+(i%8)*18,serialBase:'1/99',image:''}))},
+ emerald:{id:'emerald',name:'Emerald',sport:'Baseball',price:500,image:'https://codehs.com/uploads/ff6c1ed824fa8976fb3046a6d45556af',description:'Green-themed pack with premium but accessible hits and sharp upside.',short:'Emerald',rarityLabel:'Numbered cards and star inserts',grailsRate:0.06,chaseRate:0.34,lineupBatchSize:30,grails:[
+  {id:'emerald-grail-ohtani',title:'Shohei Ohtani Auto 1/1',value:47000,serial:'1/1',sport:'Baseball',tier:'Grail',image:'',note:'Emerald banner hit.'},
+  {id:'emerald-grail-ronaldo',title:'Pete Alonso Superfractor 1/1',value:39000,serial:'1/1',sport:'Baseball',tier:'Grail',image:'',note:'Elite baseball grail.'}
+ ],chase:[
+  {id:'emerald-chase-tatum-5',title:'Freddie Freeman Auto 1/5',value:12200,serial:'1/5',sport:'Baseball',tier:'Chase',image:'',note:'Top-tier MLB chase.'},
+  {id:'emerald-chase-mahomes-10',title:'Shohei Ohtani Black 1/10',value:11000,serial:'1/10',sport:'Baseball',tier:'Chase',image:'',note:'Star-player color hit.'},
+  {id:'emerald-chase-otani-25',title:'Shohei Ohtani Refractor 1/25',value:9800,serial:'1/25',sport:'Baseball',tier:'Chase',image:'',note:'Strong collector demand.'}
+ ],lineupBlueprints:Array.from({length:30},(_,i)=>({title:`Emerald Lineup ${i+1}`,sport:['Baseball','Baseball','Baseball','Baseball'][i%4],value:110+(i%10)*15,serialBase:'1/250',image:''}))},
+ gold:{id:'gold',name:'Gold',sport:'Baseball',price:100,image:'https://codehs.com/uploads/4909854896b1113f8bf765adfd255d6f',description:'Entry-friendly gold pack with a sleek premium look and collectible value.',short:'Gold',rarityLabel:'Affordable numbered and insert hits',grailsRate:0.10,chaseRate:0.46,lineupBatchSize:30,grails:[
+  {id:'gold-grail-curry',title:'Mookie Betts Black 1/1',value:18000,serial:'1/1',sport:'Baseball',tier:'Grail',image:'',note:'Still elite at the gold level.'}
+ ],chase:[
+  {id:'gold-chase-rice-10',title:'Cal Ripken Jr. Auto 1/10',value:5500,serial:'1/10',sport:'Baseball',tier:'Chase',image:'',note:'Legendary skill player.'},
+  {id:'gold-chase-soto-25',title:'Juan Soto Gold 1/25',value:4700,serial:'1/25',sport:'Baseball',tier:'Chase',image:'',note:'Modern star.'},
+  {id:'gold-chase-bellingham-50',title:'Bobby Witt Jr. 1/50',value:3800,serial:'1/50',sport:'Baseball',tier:'Chase',image:'',note:'Hot global baseball card.'}
+ ],lineupBlueprints:Array.from({length:30},(_,i)=>({title:`Gold Lineup ${i+1}`,sport:['Baseball','Baseball','Baseball','Baseball'][i%4],value:45+(i%12)*8,serialBase:'1/499',image:''}))},
+ silver:{id:'silver',name:'Silver',sport:'Baseball',price:25,image:'https://codehs.com/uploads/bcd58c5a5ee753d6b1a8573d3a3e9155',description:'Lowest entry pack with sleek presentation and real collectible hits.',short:'Silver',rarityLabel:'Starter numbered cards and mini chases',grailsRate:0.12,chaseRate:0.52,lineupBatchSize:30,grails:[
+  {id:'silver-grail-jordan',title:'Ken Griffey Jr. Silver 1/1',value:12000,serial:'1/1',sport:'Baseball',tier:'Grail',image:'',note:'Rare at the entry level.'}
+ ],chase:[
+  {id:'silver-chase-trout-25',title:'Mike Trout Auto 1/25',value:3200,serial:'1/25',sport:'Baseball',tier:'Chase',image:'',note:'A big-name silver hit.'},
+  {id:'silver-chase-allen-50',title:'Corbin Carroll 1/50',value:2900,serial:'1/50',sport:'Baseball',tier:'Chase',image:'',note:'Premium ace pull.'},
+  {id:'silver-chase-haaland-99',title:'Paul Skenes 1/99',value:2600,serial:'1/99',sport:'Baseball',tier:'Chase',image:'',note:'Strong collector appeal.'}
+ ],lineupBlueprints:Array.from({length:30},(_,i)=>({title:`Silver Lineup ${i+1}`,sport:['Baseball','Baseball','Baseball','Baseball'][i%4],value:15+(i%10)*2,serialBase:'1/999',image:''}))}
+};
+
+/*
+  ===================== QUICK CARD EDITOR =====================
+  Edit real card details here instead of searching through the pack logic.
+
+  Fixed cards: add or update an entry in CARD_EDITOR using the card ID.
+  Lineup cards: add a numbered slot under LINEUP_EDITOR for a pack.
+  You may set title, serial, image, value, sport, tier, and note. Keep the
+  serial in the title (for example, "Shohei Ohtani Auto 1/1") so both match.
+  Leave image as an empty string until you have a photo URL to paste in.
+*/
+const CARD_EDITOR={
+  'legendary-grail-mahomes-1of1':{
+    title:'Shohei Ohtani Shield Auto 1/1',
+    serial:'1/1',
+    image:'',
+    value:52000,
+    sport:'Baseball',
+    tier:'Grail',
+    note:'Big-game baseball grail.'
+  }
+};
+
+const LINEUP_EDITOR={
+  // Example: replace Legendary lineup card #1 with a real card.
+  // legendary:{1:{title:'2024 Topps Chrome Rookie 1/99',serial:'1/99',image:'https://your-image-url.jpg',value:680,sport:'Baseball',note:'Add your card note here.'}}
+};
+
+const state=loadState();
+let activePackId='legendary';
+let activeCard=null;
+
+function loadState(){const fallback={balance:0,totalSpent:0,packsOpened:0,soldValue:0,inventory:[],pulled:{},packRuntime:{}};try{const raw=localStorage.getItem(SAVE_KEY);const parsed=raw?JSON.parse(raw):{};const merged={...fallback,...parsed};if(!merged.packRuntime||typeof merged.packRuntime!=='object')merged.packRuntime={};return merged}catch{return fallback}}
+function saveState(){localStorage.setItem(SAVE_KEY,JSON.stringify(state))}
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>el.classList.remove('show'),2200)}
+function showTab(tabId){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.querySelectorAll('.tab-btn,.nav a').forEach(b=>b.classList.remove('active'));document.getElementById(tabId).classList.add('active');document.querySelectorAll(`[data-tab="${tabId}"]`).forEach(el=>el.classList.add('active'))}
+function formatMoney(n){return fmt.format(n)}
+function getRuntime(packId){if(!state.packRuntime[packId])state.packRuntime[packId]={lineupBatchIndex:1,lineupPool:buildLineupBatch(packId,1),sectionPool:buildFixedPools(packId)};return state.packRuntime[packId]}
+function getValidSerial(title,fallback='1/999'){const valid=/\b1\/(?:1|5|10|25|50|99|250|499|999)\b/;const fromTitle=String(title||'').match(valid);if(fromTitle)return fromTitle[0];const fromFallback=String(fallback||'').match(valid);return fromFallback?fromFallback[0]:'1/999'}
+function titleWithSerial(title,serial){return String(title||'').includes(serial)?String(title||''):`${title} ${serial}`}
+function normalizeCard(card){const serial=getValidSerial(card.title,card.serial);return{...card,title:titleWithSerial(card.title,serial),serial}}
+function getCardEditor(card){return CARD_EDITOR[card.id]||{}}
+function buildFixedPools(packId){const pack=PACKS[packId];return{grails:pack.grails.map(card=>({...normalizeCard({...card,...getCardEditor(card)}),packId})),chase:pack.chase.map(card=>({...normalizeCard({...card,...getCardEditor(card)}),packId}))}}
+function buildLineupBatch(packId,batchIndex){const pack=PACKS[packId];return pack.lineupBlueprints.map((bp,idx)=>{const editable={...bp,...(LINEUP_EDITOR[packId]?.[idx+1]||{})},serial=getValidSerial(editable.title,editable.serial||editable.serialBase);return{id:`${packId}-lineup-b${batchIndex}-${idx+1}`,title:titleWithSerial(editable.title,serial),value:editable.value,serial,sport:editable.sport,tier:editable.tier||'Common',image:editable.image||'',note:editable.note||`Batch ${batchIndex} lineup card`,packId}})}
+function ensureRuntime(packId){const runtime=getRuntime(packId);if(!runtime.sectionPool)runtime.sectionPool=buildFixedPools(packId);if(!runtime.lineupPool||runtime.lineupPool.length===0){runtime.lineupBatchIndex+=1;runtime.lineupPool=buildLineupBatch(packId,runtime.lineupBatchIndex)}return runtime}
+function normalizeSavedCards(){state.inventory=state.inventory.map(normalizeCard);Object.values(state.packRuntime).forEach(runtime=>{if(runtime.lineupPool)runtime.lineupPool=runtime.lineupPool.map(normalizeCard);if(runtime.sectionPool){if(runtime.sectionPool.grails)runtime.sectionPool.grails=runtime.sectionPool.grails.map(normalizeCard);if(runtime.sectionPool.chase)runtime.sectionPool.chase=runtime.sectionPool.chase.map(normalizeCard)}})}
+function getAvailableCards(packId){const runtime=ensureRuntime(packId);return{grails:runtime.sectionPool.grails.filter(card=>!(state.pulled[card.id]>0)),chase:runtime.sectionPool.chase.filter(card=>!(state.pulled[card.id]>0)),lineup:runtime.lineupPool.filter(card=>!(state.pulled[card.id]>0))}}
+function chooseCard(packId){const pack=PACKS[packId],runtime=ensureRuntime(packId),pools=getAvailableCards(packId);const sections=[{key:'grails',rate:pack.grailsRate,cards:pools.grails},{key:'chase',rate:pack.chaseRate,cards:pools.chase},{key:'lineup',rate:1-pack.grailsRate-pack.chaseRate,cards:pools.lineup}].filter(s=>s.cards.length>0);if(!sections.length)return null;let total=sections.reduce((sum,s)=>sum+s.rate,0),roll=Math.random()*total,chosen=sections[sections.length-1];for(const s of sections){roll-=s.rate;if(roll<=0){chosen=s;break}}const picked=chosen.cards[Math.floor(Math.random()*chosen.cards.length)];state.pulled[picked.id]=(state.pulled[picked.id]||0)+1;if(chosen.key==='lineup'){runtime.lineupPool=runtime.lineupPool.filter(card=>card.id!==picked.id);if(runtime.lineupPool.length===0){runtime.lineupBatchIndex+=1;runtime.lineupPool=buildLineupBatch(packId,runtime.lineupBatchIndex)}}if(chosen.key==='grails')runtime.sectionPool.grails=runtime.sectionPool.grails.filter(card=>card.id!==picked.id);if(chosen.key==='chase')runtime.sectionPool.chase=runtime.sectionPool.chase.filter(card=>card.id!==picked.id);return picked}
+function openPackPreview(packId){closeOverlay('cardOverlay');activePackId=packId;const pack=PACKS[packId],pools=getAvailableCards(packId);document.getElementById('modalPackLabel').textContent=`${pack.name} Pack Preview`;document.getElementById('modalPackName').textContent=pack.name;document.getElementById('modalPackDesc').textContent=pack.description;document.getElementById('modalPackPrice').textContent=formatMoney(pack.price);document.getElementById('modalPackRare').textContent=`${(pack.grailsRate*100).toFixed(2)}%`;document.getElementById('modalPackCommon').textContent=`${((1-pack.grailsRate-pack.chaseRate)*100).toFixed(2)}%`;const modalArt=document.getElementById('modalPackArt');modalArt.innerHTML='';if(pack.image){const img=document.createElement('img');img.src=pack.image;img.alt=`${pack.name} pack art`;modalArt.appendChild(img)}else{modalArt.innerHTML=`<div class="modal-pack-text"><small>FORGE PACK</small>${pack.short}<br>PACK</div>`}const sectionsWrap=document.getElementById('lootSections');sectionsWrap.innerHTML='';[{label:'Grails',rate:pack.grailsRate,cards:pools.grails,emptyText:'No grails remain in this pack right now.'},{label:'Chase',rate:pack.chaseRate,cards:pools.chase,emptyText:'No chase cards remain in this pack right now.'},{label:'Common',rate:1-pack.grailsRate-pack.chaseRate,cards:pools.lineup,emptyText:'The current common batch is empty. It will refresh with 30 more cards automatically.'}].forEach(section=>{const group=document.createElement('div');group.className='pack-section';group.innerHTML=`<div class="group-title"><h3>${section.label}</h3><span>Section hit rate ${(section.rate*100).toFixed(2)}%</span></div><div class="rate">${section.cards.length} cards currently available in this section</div>`;if(section.cards.length===0){const empty=document.createElement('div');empty.className='empty';empty.textContent=section.emptyText;group.appendChild(empty)}else{const grid=document.createElement('div');grid.className='loot-grid';section.cards.forEach(card=>{const tile=document.createElement('div');tile.className='loot';tile.innerHTML=`<div class="loot-preview">${card.image?`<img src="${card.image}" alt="${escapeHtml(card.title)}">`:`<div class="loot-placeholder">${escapeHtml(shortenTitle(card.title))}</div>`}</div><div class="loot-body"><div class="loot-title">${escapeHtml(card.title)}</div><div class="loot-meta">${escapeHtml(card.sport)} · ${escapeHtml(card.serial)} · ${formatMoney(card.value)}</div><div class="loot-badges"><span class="loot-badge">${escapeHtml(section.label)}</span><span class="loot-badge">${escapeHtml(card.serial)}</span></div></div>`;tile.onclick=()=>openCardPreview(card,section.label,true,packId);grid.appendChild(tile)});group.appendChild(grid)}sectionsWrap.appendChild(group)});openOverlay('packOverlay');document.getElementById('buyOpenBtn').onclick=()=>buyAndOpenPack(packId)}
+function openCardPreview(card,tierName,previewOnly=false,packId=activePackId){activeCard={...card,previewOnly,packId,tierName};const pack=PACKS[packId];document.getElementById('cardActions').classList.toggle('hidden',previewOnly);document.getElementById('cardPackLabel').textContent=`${pack.name} · ${tierName}`;document.getElementById('cardTitle').textContent=card.title;document.getElementById('cardDesc').textContent=card.note||`${card.sport} card`;document.getElementById('cardValue').textContent=formatMoney(card.value);document.getElementById('cardSerial').textContent=card.serial||'—';document.getElementById('cardTier').textContent=card.tier||tierName;const hero=document.getElementById('cardHero');hero.classList.remove('flip');void hero.offsetWidth;hero.classList.add('flip');hero.innerHTML='';if(card.image){const img=document.createElement('img');img.src=card.image;img.alt=card.title;hero.appendChild(img)}else{hero.innerHTML=`<div class="modal-pack-text"><small>${escapeHtml(pack.name.toUpperCase())}</small>${escapeHtml(shortenTitle(card.title,14))}</div>`}document.getElementById('sellCardBtn').onclick=()=>{if(previewOnly){toast('This is only a preview card. Buy the pack first to add it to your collection.');return}sellCollectionCard(card.id);closeOverlay('cardOverlay')};document.getElementById('keepCardBtn').onclick=()=>closeOverlay('cardOverlay');openOverlay('cardOverlay')}
+async function buyAndOpenPack(packId){const pack=PACKS[packId];state.balance-=pack.price;state.totalSpent+=pack.price;state.packsOpened+=1;const pulled=chooseCard(packId);if(!pulled){updateUI();toast(`No eligible cards left in ${pack.name}.`);return}const result={...pulled,packId,packName:pack.name,previewOnly:false};state.inventory.push({id:result.id,title:result.title,value:result.value,serial:result.serial,sport:result.sport,tier:result.tier,image:result.image||'',note:result.note||'',packId:pack.id,packName:pack.name});activeCard=result;updateUI();saveState();renderCollection();closeOverlay('packOverlay');openOverlay('cardOverlay');document.getElementById('sellCardBtn').onclick=()=>toast('The card is still being revealed.');document.getElementById('keepCardBtn').onclick=()=>toast('The card is still being revealed.');const hero=document.getElementById('cardHero');const showRevealStep=(title,description,label)=>{document.getElementById('cardPackLabel').textContent=`${pack.name} · Opening...`;document.getElementById('cardTitle').textContent=title;document.getElementById('cardDesc').textContent=description;document.getElementById('cardValue').textContent='—';document.getElementById('cardSerial').textContent='—';document.getElementById('cardTier').textContent='—';hero.innerHTML=`<div class='modal-pack-text'><small>FORGE PACK</small>${label}</div>`};hero.classList.remove('flip');hero.classList.add('reveal-pulse');showRevealStep('Pack secured','The foil seal is breaking.','SEALED<br>PACK');await new Promise(resolve=>setTimeout(resolve,2500));showRevealStep('Checking the serial','A numbered card is taking shape.','SCAN<br>...');await new Promise(resolve=>setTimeout(resolve,2500));showRevealStep('Final reveal','One last look before the slab turns over.','REVEAL<br>...');await new Promise(resolve=>setTimeout(resolve,3000));hero.classList.remove('reveal-pulse');openCardPreview(result,result.tier||'Common',false,packId);toast(`${pack.name} opened. ${result.title} pulled.`); }function sellCollectionCard(cardId){const idx=state.inventory.findIndex(c=>c.id===cardId);if(idx===-1)return;const card=state.inventory[idx];const saleValue=Math.round(card.value*0.9);state.balance+=saleValue;state.soldValue+=saleValue;state.inventory.splice(idx,1);saveState();updateUI();renderCollection();toast(`Sold ${card.title} for ${formatMoney(saleValue)} after the 10% selling fee.`)}
+function updateUI(){document.getElementById('cashValue').textContent=formatMoney(state.balance);const collectionValue=state.inventory.reduce((sum,c)=>sum+c.value,0);const netWorth=state.balance+collectionValue;document.getElementById('netWorthValue').textContent=formatMoney(netWorth);document.getElementById('packsOpenedValue').textContent=state.packsOpened;document.getElementById('ownedValue').textContent=state.inventory.length;document.getElementById('spentValue').textContent=formatMoney(state.totalSpent);document.getElementById('soldValue').textContent=formatMoney(state.soldValue);document.getElementById('collectionValue').textContent=formatMoney(collectionValue);document.getElementById('profitValue').textContent=formatMoney(netWorth-state.totalSpent);saveState()}
+function renderPacks(filter=''){const q=filter.trim().toLowerCase(),grid=document.getElementById('packGrid');grid.innerHTML='';Object.values(PACKS).sort((a,b)=>b.price-a.price).filter(pack=>!q||pack.name.toLowerCase().includes(q)||pack.description.toLowerCase().includes(q)||pack.sport.toLowerCase().includes(q)).forEach(pack=>{const el=document.createElement('div');el.className='pack';el.innerHTML=`<div class="pack-top"><div class="pill">${escapeHtml(pack.name)}</div><div class="pack-price">${formatMoney(pack.price)}</div></div><div class="pack-art">${pack.image?`<img src="${pack.image}" alt="${escapeHtml(pack.name)} pack">`:`<div class="pack-name"><small>${escapeHtml(pack.name)} ${escapeHtml(pack.sport)}</small>FORGE<br>PACK</div>`}</div><div class="pack-desc">${escapeHtml(pack.description)}</div><div class="pack-actions"><button class="btn pack-btn">Inspect Pack</button><button class="btn pack-buy-btn">Buy Now</button></div>`;el.querySelector('.pack-btn').onclick=()=>openPackPreview(pack.id);el.querySelector('.pack-buy-btn').onclick=()=>buyAndOpenPack(pack.id);el.onclick=e=>{if(e.target.tagName.toLowerCase()!=='button')openPackPreview(pack.id)};grid.appendChild(el)})}
+function renderCollection(){const search=document.getElementById('collectionSearch').value.trim().toLowerCase(),filter=document.getElementById('collectionFilter').value,sort=document.getElementById('collectionSort').value,grid=document.getElementById('collectionGrid'),empty=document.getElementById('collectionEmpty');let cards=[...state.inventory];if(search)cards=cards.filter(c=>(c.title||'').toLowerCase().includes(search)||(c.sport||'').toLowerCase().includes(search)||(c.tier||'').toLowerCase().includes(search));if(filter!=='all')cards=cards.filter(c=>(c.serial||'').includes(filter));cards.sort((a,b)=>sort==='value-desc'?(b.value||0)-(a.value||0):sort==='value-asc'?(a.value||0)-(b.value||0):sort==='name-asc'?(a.title||'').localeCompare(b.title||''):serialToSort(a.serial)-serialToSort(b.serial));document.getElementById('collectionCountPill').textContent=`${cards.length} cards`;grid.innerHTML='';if(cards.length===0){empty.classList.remove('hidden');return}empty.classList.add('hidden');cards.forEach(card=>{const item=document.createElement('div');item.className='collection-card card';item.innerHTML=`<div class="slab"><div class="slab-top"><div class="slab-brand">${escapeHtml(card.packName||'FORGE')}</div><div class="slab-id">${escapeHtml(card.sport||'')}<br>${escapeHtml(card.serial||'')}</div></div><div class="card-image">${card.image?`<img src="${card.image}" alt="${escapeHtml(card.title)}">`:`<div class="placeholder-card">${escapeHtml(shortenTitle(card.title,16))}</div>`}</div></div><div class="card-meta"><div class="card-title">${escapeHtml(card.title)}</div><div class="card-sub">${escapeHtml(card.tier||'Collection')} · ${formatMoney(card.value)} · ${escapeHtml(card.note||'')}</div><div class="card-badges"><span class="badge">${escapeHtml(card.packName||'FORGE')}</span><span class="badge">${escapeHtml(card.serial||'')}</span><span class="badge">${escapeHtml(card.sport||'')}</span></div></div>`;item.onclick=()=>openCollectionCard(card.id);grid.appendChild(item)})}
+function openCollectionCard(cardId){closeOverlay('packOverlay');const card=state.inventory.find(c=>c.id===cardId);if(!card)return;document.getElementById('cardActions').classList.remove('hidden');activeCard={...card,previewOnly:false};document.getElementById('cardPackLabel').textContent=`${card.packName||'FORGE'} · Collection`;document.getElementById('cardTitle').textContent=card.title;document.getElementById('cardDesc').textContent=card.note||`${card.sport} card`;document.getElementById('cardValue').textContent=formatMoney(card.value);document.getElementById('cardSerial').textContent=card.serial||'—';document.getElementById('cardTier').textContent=card.tier||'Collection';const hero=document.getElementById('cardHero');hero.classList.remove('flip');void hero.offsetWidth;hero.classList.add('flip');hero.innerHTML='';if(card.image){const img=document.createElement('img');img.src=card.image;img.alt=card.title;hero.appendChild(img)}else{hero.innerHTML=`<div class="modal-pack-text"><small>${escapeHtml((card.packName||'FORGE').toUpperCase())}</small>${escapeHtml(shortenTitle(card.title,14))}</div>`}document.getElementById('sellCardBtn').onclick=()=>{sellCollectionCard(card.id);closeOverlay('cardOverlay')};document.getElementById('keepCardBtn').onclick=()=>closeOverlay('cardOverlay');openOverlay('cardOverlay')}
+function updateBodyScrollLock(){document.body.style.overflow=document.querySelector('.overlay.show')?'hidden':''} function openOverlay(id){const el=document.getElementById(id);el.classList.add('show');el.setAttribute('aria-hidden','false');updateBodyScrollLock()}
+function closeOverlay(id){const el=document.getElementById(id);el.classList.remove('show');el.setAttribute('aria-hidden','true');updateBodyScrollLock()}
+function serialToSort(serial){if(!serial)return 999999;const m=String(serial).match(/1\/(\d+)/);return m?Number(m[1]):999999}
+function shortenTitle(str,len=18){if(!str)return'';return str.length>len?str.slice(0,len-1)+'…':str}
+function escapeHtml(str){return String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;')}
+document.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();showTab(el.dataset.tab);if(el.dataset.tab==='collectionView')renderCollection()}))
+document.getElementById('homeLogo').onclick=()=>{showTab('storeView');renderPacks(document.getElementById('topSearch').value);window.scrollTo({top:0,behavior:'smooth'})}
+document.getElementById('goCollection').onclick=()=>{showTab('collectionView');renderCollection();document.getElementById('collectionView').scrollIntoView({behavior:'smooth',block:'start'})}
+document.getElementById('openFirstPack').onclick=()=>openPackPreview('legendary')
+document.getElementById('resetBtn').onclick=()=>{if(!confirm('Reset balance, collection, and pack progress?'))return;localStorage.removeItem(SAVE_KEY);location.reload()}
+document.getElementById('closeModal').onclick=()=>closeOverlay('packOverlay');document.getElementById('closeModalBtn').onclick=()=>closeOverlay('packOverlay');document.getElementById('closeCardModal').onclick=()=>closeOverlay('cardOverlay')
+document.getElementById('packOverlay').addEventListener('click',e=>{if(e.target.id==='packOverlay')closeOverlay('packOverlay')});document.getElementById('cardOverlay').addEventListener('click',e=>{if(e.target.id==='cardOverlay')closeOverlay('cardOverlay')});document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeOverlay('packOverlay');closeOverlay('cardOverlay')}})
+document.getElementById('topSearch').addEventListener('input',e=>renderPacks(e.target.value));document.getElementById('collectionSearch').addEventListener('input',renderCollection);document.getElementById('collectionFilter').addEventListener('change',renderCollection);document.getElementById('collectionSort').addEventListener('change',renderCollection)
+document.getElementById('forgeLogo').src=LOGO_URL;normalizeSavedCards();Object.keys(PACKS).forEach(packId=>ensureRuntime(packId));updateUI();renderPacks();renderCollection();
+</script>
+
+</body>
+</html>
